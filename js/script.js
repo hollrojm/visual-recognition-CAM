@@ -55,8 +55,8 @@ const llenarSelectConDispositivosDisponibles = () => {
 (function() {
     // Comenzamos viendo si tiene soporte, si no, nos detenemos
     if (!tieneSoporteUserMedia()) {
-        alert("Lo siento. Tu navegador no soporta esta característica");
-        $estado.innerHTML = "Parece que tu navegador no soporta esta característica. Intenta actualizarlo.";
+        alert("Lo sientimos. Su navegador no soporta esta característica");
+        $estado.innerHTML = "Parece que su navegador no soporta esta característica. Intente actualizarlo.";
         return;
     }
     //Aquí guardaremos el stream globalmente
@@ -84,8 +84,6 @@ const llenarSelectConDispositivosDisponibles = () => {
                 mostrarStream(dispositivosDeVideo[0].deviceId);
             }
         });
-
-
 
     const mostrarStream = idDeDispositivo => {
         _getUserMedia({
@@ -119,7 +117,6 @@ const llenarSelectConDispositivosDisponibles = () => {
                 $video.play();
 
                 //Escuchar el click del botón para tomar la foto
-                //Escuchar el click del botón para tomar la foto
                 $boton.addEventListener("click", function() {
 
                     //Pausar reproducción
@@ -132,8 +129,8 @@ const llenarSelectConDispositivosDisponibles = () => {
                     contexto.drawImage($video, 0, 0, $canvas.width, $canvas.height);
 
                     let foto = $canvas.toDataURL(); //Esta es la foto, en base 64
-                    $estado.innerHTML = "Enviando foto. Por favor, espera...";
-                    fetch("./guardar_foto.php", {
+                    $estado.innerHTML = "Enviando foto. Por favor, espere...";
+                    fetch("../php/guardar_foto.php", {
                             method: "POST",
                             body: encodeURIComponent(foto),
                             headers: {
@@ -142,12 +139,12 @@ const llenarSelectConDispositivosDisponibles = () => {
                         })
                         .then(resultado => {
                             // A los datos los decodificamos como texto plano
-                            return resultado.text()
+                            return resultado.text();
                         })
                         .then(nombreDeLaFoto => {
                             // nombreDeLaFoto trae el nombre de la imagen que le dio PHP
                             console.log("La foto fue enviada correctamente");
-                            $estado.innerHTML = `Foto guardada con éxito. Puedes verla <a target='_blank' href='./${nombreDeLaFoto}'> aquí</a>`;
+                            $estado.innerHTML = `Foto guardada con éxito. Puedes verla <a target='_blank' href='.../php/${nombreDeLaFoto}'> aquí</a>`;
                         })
 
                     //Reanudar reproducción
@@ -155,7 +152,7 @@ const llenarSelectConDispositivosDisponibles = () => {
                 });
             }, (error) => {
                 console.log("Permiso denegado o error: ", error);
-                $estado.innerHTML = "No se puede acceder a la cámara, o no diste permiso.";
+                $estado.innerHTML = "No se puede acceder a la cámara o no diste permiso, En algunos caso puedes recargar la PAGINA...";
             });
     }
 })();

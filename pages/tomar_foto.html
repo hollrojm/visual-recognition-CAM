@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <LINK REL=StyleSheet HREF="../css/style.css" TYPE="text/css">
+    <title>Tomar Fotografia con camara Incorporada</title>
+</head>
+<body>
+    <h1>Tomar Fotografia con camara Incorporada</h1>
+    <h2>Utilizando Javascript</h2>
+    <div>
+        <form action="../php/guardar_foto.php">
+        <select name="listaDeDispositivos" id="listaDeDispositivos"></select>
+        <button type = "submit" onclick = "save_image()" > Guardar </button>
+		<p id="estado"></p>
+        <br>
+        <video muted="muted" id="video"></video>
+        <h2>Su fotografia es: </h2>
+        <canvas id="canvas"></canvas>
+    </form>
+    </div>
+</body>
+<script src="../js/script.js"></script>
+</html>
