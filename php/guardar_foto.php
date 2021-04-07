@@ -45,21 +45,6 @@ function save_image($nombreImagenGuardada,$name = null){
 		return json_decode($result, true);
 	}
 	curl_close($ch);
-	/*
-	print_r($result);
-	$curl = curl_init();
-
-	$httpheader = ['iam_apikey: 4vyPKa81piMdMQTruEpk0BQqih1Hy3GGgv9mVMCxv_uJ'];
-	$url = $result;
-	
-	curl_setopt($curl, CURLOPT_URL, $url);
-	curl_setopt($curl, CURLOPT_RETORNTRANSFER, 1);
-	curl_setopt($curl, CURLOPT_HTTPHEADER, $httpheader);
-	$resultado = curl_exec($curl);
-	
-	print_r($resultado);
-	curl_close($ch);
-	curl_close($curl);*/
 }
 
 if (!empty($_FILES['image'])) {

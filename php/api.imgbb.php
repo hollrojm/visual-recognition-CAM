@@ -60,7 +60,10 @@
                         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
                 $resultado = curl_exec($ch);
                 $this->json = json_decode($resultado, true);
+                
             }
+            
+            
         }
 
         public function setName($nombre){
@@ -74,4 +77,5 @@
         public function getUrl(){
             return $this->json['data']['url'];
         }
+
     }

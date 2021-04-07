@@ -19,8 +19,26 @@
 	<h1>Tomar foto con JavaScript v3.0</h1>
 	<h2>Selecciona un dispositivo</h2>
 	<div>
-		<a class="buton" href="./pages/tomar_foto.html">Toma una Fotogrfia</a>
-		<a class="buton" href="./pages/selec_foto.html">Seleccione una Fotografia Existente</a>
-	</div>
+        <form action="../php/guardar_foto.php">
+        <select name="listaDeDispositivos" id="listaDeDispositivos"></select>
+		<button id="boton">Tomar foto</button>
+		<p id="estado"></p>
+        <br>
+        <video muted="muted" id="video"></video>
+        <h2>Su fotografia es: </h2>
+        <canvas id="canvas"></canvas>
+    </form>
+    </div>
+	<form action="./php/subir_foto.php" method = "post" enctype = "multipart/form-data">
+		<input type = "file" name = "image" accept = "image/*">
+		<br>
+		<button type = "submit">SUBIR IMAGEN A SERVIDOR</button>
+	</form>
+	<form action="./php/ibm.php" method = "post" enctype = "multipart/form-data">
+		<br>
+		<input type="text" name="laurl">
+		<button type = "submit">ANALIZAR IMAGEN CON IBM</button>
+	</form>
+	<script src="./js/script.js"></script>
 </body>
 </html>

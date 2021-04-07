@@ -1,8 +1,8 @@
 /*
-    Tomar una fotografía y guardarla en un archivo v3
-    @date 2018-10-22
-    @author parzibyte
-    @web parzibyte.me/blog
+    Tomar una fotografÃ­a y descargarla
+	@date 2019-04-23
+	@author parzibyte
+	@web parzibyte.me/blog
 */
 const tieneSoporteUserMedia = () =>
     !!(navigator.getUserMedia || (navigator.mozGetUserMedia || navigator.mediaDevices.getUserMedia) || navigator.webkitGetUserMedia || navigator.msGetUserMedia)
@@ -12,7 +12,6 @@ const _getUserMedia = (...arguments) =>
 // Declaramos elementos del DOM
 const $video = document.querySelector("#video"),
     $canvas = document.querySelector("#canvas"),
-    $estado = document.querySelector("#estado"),
     $boton = document.querySelector("#boton"),
     $listaDeDispositivos = document.querySelector("#listaDeDispositivos");
 
@@ -24,7 +23,7 @@ const obtenerDispositivos = () => navigator
     .mediaDevices
     .enumerateDevices();
 
-// La función que es llamada después de que ya se dieron los permisos
+// La funciÃ³n que es llamada despuÃ©s de que ya se dieron los permisos
 // Lo que hace es llenar el select con los dispositivos obtenidos
 const llenarSelectConDispositivosDisponibles = () => {
 
@@ -39,7 +38,7 @@ const llenarSelectConDispositivosDisponibles = () => {
                 }
             });
 
-            // Vemos si encontramos algún dispositivo, y en caso de que si, entonces llamamos a la función
+            // Vemos si encontramos algÃºn dispositivo, y en caso de que si, entonces llamamos a la funciÃ³n
             if (dispositivosDeVideo.length > 0) {
                 // Llenar el select
                 dispositivosDeVideo.forEach(dispositivo => {
@@ -55,18 +54,18 @@ const llenarSelectConDispositivosDisponibles = () => {
 (function() {
     // Comenzamos viendo si tiene soporte, si no, nos detenemos
     if (!tieneSoporteUserMedia()) {
-        alert("Lo sientimos. Su navegador no soporta esta característica");
-        $estado.innerHTML = "Parece que su navegador no soporta esta característica. Intente actualizarlo.";
+        alert("Lo siento. Tu navegador no soporta esta caracterÃ­stica");
+        $estado.innerHTML = "Parece que tu navegador no soporta esta caracterÃ­stica. Intenta actualizarlo.";
         return;
     }
-    //Aquí guardaremos el stream globalmente
+    //AquÃ­ guardaremos el stream globalmente
     let stream;
 
 
     // Comenzamos pidiendo los dispositivos
     obtenerDispositivos()
         .then(dispositivos => {
-            // Vamos a filtrarlos y guardar aquí los de vídeo
+            // Vamos a filtrarlos y guardar aquÃ­ los de vÃ­deo
             const dispositivosDeVideo = [];
 
             // Recorrer y filtrar
@@ -77,7 +76,7 @@ const llenarSelectConDispositivosDisponibles = () => {
                 }
             });
 
-            // Vemos si encontramos algún dispositivo, y en caso de que si, entonces llamamos a la función
+            // Vemos si encontramos algÃºn dispositivo, y en caso de que si, entonces llamamos a la funciÃ³n
             // y le pasamos el id de dispositivo
             if (dispositivosDeVideo.length > 0) {
                 // Mostrar stream con el ID del primer dispositivo, luego el usuario puede cambiar
@@ -85,19 +84,21 @@ const llenarSelectConDispositivosDisponibles = () => {
             }
         });
 
+
+
     const mostrarStream = idDeDispositivo => {
         _getUserMedia({
                 video: {
-                    // Justo aquí indicamos cuál dispositivo usar
+                    // Justo aquÃ­ indicamos cuÃ¡l dispositivo usar
                     deviceId: idDeDispositivo,
                 }
             },
             (streamObtenido) => {
-                // Aquí ya tenemos permisos, ahora sí llenamos el select,
-                // pues si no, no nos daría el nombre de los dispositivos
+                // AquÃ­ ya tenemos permisos, ahora sÃ­ llenamos el select,
+                // pues si no, no nos darÃ­a el nombre de los dispositivos
                 llenarSelectConDispositivosDisponibles();
 
-                // Escuchar cuando seleccionen otra opción y entonces llamar a esta función
+                // Escuchar cuando seleccionen otra opciÃ³n y entonces llamar a esta funciÃ³n
                 $listaDeDispositivos.onchange = () => {
                     // Detener el stream
                     if (stream) {
@@ -109,50 +110,37 @@ const llenarSelectConDispositivosDisponibles = () => {
                     mostrarStream($listaDeDispositivos.value);
                 }
 
-                // Simple asignación
+                // Simple asignaciÃ³n
                 stream = streamObtenido;
 
-                // Mandamos el stream de la cámara al elemento de vídeo
+                // Mandamos el stream de la cÃ¡mara al elemento de vÃ­deo
                 $video.srcObject = stream;
                 $video.play();
 
-                //Escuchar el click del botón para tomar la foto
+                //Escuchar el click del botÃ³n para tomar la foto
                 $boton.addEventListener("click", function() {
 
-                    //Pausar reproducción
+                    //Pausar reproducciÃ³n
                     $video.pause();
 
-                    //Obtener contexto del canvas y dibujar sobre él
+                    //Obtener contexto del canvas y dibujar sobre Ã©l
                     let contexto = $canvas.getContext("2d");
                     $canvas.width = $video.videoWidth;
                     $canvas.height = $video.videoHeight;
                     contexto.drawImage($video, 0, 0, $canvas.width, $canvas.height);
 
                     let foto = $canvas.toDataURL(); //Esta es la foto, en base 64
-                    $estado.innerHTML = "Enviando foto. Por favor, espere...";
-                    fetch("../php/guardar_foto.php", {
-                            method: "POST",
-                            body: encodeURIComponent(foto),
-                            headers: {
-                                "Content-type": "application/x-www-form-urlencoded",
-                            }
-                        })
-                        .then(resultado => {
-                            // A los datos los decodificamos como texto plano
-                            return resultado.text();
-                        })
-                        .then(nombreDeLaFoto => {
-                            // nombreDeLaFoto trae el nombre de la imagen que le dio PHP
-                            console.log("La foto fue enviada correctamente");
-                            $estado.innerHTML = `Foto guardada con éxito. Puedes verla <a target='_blank' href='.../php/${nombreDeLaFoto}'> aquí</a>`;
-                        })
 
-                    //Reanudar reproducción
+                    let enlace = document.createElement('a'); // Crear un <a>
+                    enlace.download = "foto.png";
+                    enlace.href = foto;
+                    enlace.click();
+                    //Reanudar reproducciÃ³n
                     $video.play();
                 });
             }, (error) => {
                 console.log("Permiso denegado o error: ", error);
-                $estado.innerHTML = "No se puede acceder a la cámara o no diste permiso, En algunos caso puedes recargar la PAGINA...";
+                $estado.innerHTML = "No se puede acceder a la cÃ¡mara, o no diste permiso.";
             });
     }
 })();
