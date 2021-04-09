@@ -5,6 +5,103 @@
 }
 
 h1 {
-    color:blue ;
+    color: #007ACC;
+    background-color: transparent;
+    padding: 25px;
+    margin: 0px;
 }
 
+h2 {
+    color:#50316F ;
+}
+
+h3 {
+    color:#5C7EB4 ;
+}
+
+* {
+    padding: 0px;
+    margin: 0px;
+}
+head {
+    background-color: gray;
+}
+
+body {
+    text-align: center;
+    background-color: #4A5169;
+    background: url(../img/IAA.png) no-repeat center fixed; 
+}
+
+.contenedor {
+    position: relative;
+    margin-left: 275px;
+    height: 600px;
+    width: 700px;
+    padding: 30px;
+    margin-top: 5%;
+    border: 2px solid;
+    border-radius: 50px;
+    border-color: #035997;
+    background-color: rgba(031, 031, 031, .6);
+}
+
+.contenedor_two {
+    margin-left: 275px;
+    align-items: center;
+    height: 180px;
+    width: 700px;
+    padding: 30px;
+    margin-top: 5%;
+    border: 2px solid;
+    border-radius: 50px;
+    border-color: #035997;
+    background-color: rgba(031, 031, 031, .6);
+}
+
+.boton {
+    display: inline-block;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #212529;
+    text-align: center;
+    text-decoration: none;
+    vertical-align: middle;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    user-select: none;
+    background-color: transparent;
+    border: 1px solid transparent;
+    padding: .375rem .75rem;
+    font-size: 1rem;
+    border-radius: .25rem;
+    transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+    color: #6c757d;
+    border-color: #6c757d;
+}
+
+.boton:hover {
+    background-color: #6c757d ;
+    color: #F0F2F4;
+}
+
+.contenedor_two:hover {
+    border-color: #0083e0;
+    background-color: rgba(006, 014, 019, .8);
+    border: 4px solid;
+    border-radius: 40px;
+    height: 200px;
+    width: 750px;
+    margin-left: 250px;
+}
+
+.contenedor:hover {
+    border-color: #0083e0;
+    background-color: rgba(006, 014, 019, .8);
+    border: 4px solid;
+    border-radius: 40px;
+    height: 620px;
+    width: 740px;
+    margin-left: 255px;
+}

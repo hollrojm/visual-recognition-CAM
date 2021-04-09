@@ -20,4 +20,17 @@
     curl_setopt($curl, CURLOPT_USERPWD, 'apikey:' . $apikey);
     $result = curl_exec($curl);
     print_r($result);
+    $json = json_decode($result);
+    var_dump($json);
+    foreach($json as $data){
+       echo "<br> Recognition: ";
+       echo $data->name;
+       echo ",";
+     }
+
+
+
+
+    
+    
     curl_close($curl);
