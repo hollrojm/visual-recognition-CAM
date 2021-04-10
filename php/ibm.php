@@ -28,9 +28,4 @@
        echo ",";
      }
 
-
-
-
-    
-    
     curl_close($curl);
